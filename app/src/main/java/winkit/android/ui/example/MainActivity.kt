@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        paginatedRecycler.layoutManager = GridLayoutManager(this, 2)
+        val manager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int = if (position == 0) 2 else 1
+        }
+        paginatedRecycler.layoutManager = manager
 
         paginatedRecycler.adapter = adapter
         paginatedRecycler.emptyTitle = "Nessun Risultato"
@@ -32,16 +36,16 @@ class MainActivity : AppCompatActivity() {
 
         paginatedRecycler.getPageListener = getPage@{ index: Int ->
             getRandomData(index) { data ->
-
                 paginatedRecycler.refreshing = false
                 if (data != null) {
                     adapter.append(data)
+                    paginatedRecycler.haveMore = adapter.getRowsCount() <= 60
+
                     adapter.notifyDataSetChanged()
                 } else {
                     adapter.showError("Errore di connessione")
                 }
             }
-            return@getPage false
         }
 
     }
@@ -68,12 +72,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun getRandomData (index: Int, call: (data: List<String>?) -> Unit){
         Handler().postDelayed({
-            if(Math.random() > 0.8) {
+            if(Math.random() > 0.99) {
                 call(null)
             } else {
                 val result = ArrayList<String>()
-                if (Math.random() < 0.8) {
-                    for (i in 0..29) {
+                if (Math.random() < 0.99) {
+                    for (i in 0..20) {
                         val id = i + index
                         result.add("Row Item $id")
                     }

@@ -9,10 +9,13 @@
     <ImageView
         android:id="@+id/empty_icon"
         android:layout_width="92dp"
-        android:layout_height="92dp" />
+        android:layout_height="92dp"
+        android:layout_marginBottom="16dp" />
     <TextView
         android:id="@+id/empty_title"
         android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp" />
