@@ -6,10 +6,12 @@ import android.os.Handler
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import winkit.android.ui.PaginatedRecyclerView
 import java.util.*
@@ -17,16 +19,13 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     val adapter: MainActivity.Adapter = MainActivity.Adapter()
+    var currentCall: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val manager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int = if (position == 0) 2 else 1
-        }
-        paginatedRecycler.layoutManager = manager
+        paginatedRecycler.layoutManager = LinearLayoutManager(this)
 
         paginatedRecycler.adapter = adapter
         paginatedRecycler.emptyTitle = "Nessun Risultato"
@@ -36,14 +35,15 @@ class MainActivity : AppCompatActivity() {
 
         paginatedRecycler.getPageListener = getPage@{ index: Int ->
             getRandomData(index) { data ->
-                paginatedRecycler.refreshing = false
                 if (data != null) {
                     adapter.append(data)
-                    paginatedRecycler.haveMore = adapter.getRowsCount() <= 60
+                    paginatedRecycler.haveMore = !data.isEmpty() && adapter.getRowsCount() < 40
 
                     adapter.notifyDataSetChanged()
                 } else {
-                    adapter.showError("Errore di connessione")
+                    if(index == 0)
+                        adapter.showError("Errore di connessione")
+                    else Toast.makeText(this, "Errore di connessione", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -72,12 +72,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun getRandomData (index: Int, call: (data: List<String>?) -> Unit){
         Handler().postDelayed({
-            if(Math.random() > 0.99) {
+            if(Math.random() > 0.7) {
                 call(null)
             } else {
                 val result = ArrayList<String>()
-                if (Math.random() < 0.99) {
-                    for (i in 0..20) {
+                if (Math.random() < 0.6 || index > 0) {
+                    for (i in 1..15) {
                         val id = i + index
                         result.add("Row Item $id")
                     }

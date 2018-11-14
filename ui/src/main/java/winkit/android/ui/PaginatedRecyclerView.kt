@@ -57,6 +57,7 @@ class PaginatedRecyclerView
     private var visibleItemCount: Int = 0
     private var totalItemCount: Int = 0
     private var pastVisiblesItems: Int = 0
+    private var isLoadingMore: Boolean = false
     var haveMore: Boolean = true
         set(value) {
             if( field == value) return
@@ -121,11 +122,18 @@ class PaginatedRecyclerView
                         pastVisiblesItems = firstVisible
                 }
 
-                if (haveMore && visibleItemCount + pastVisiblesItems >= totalItemCount) {
-
-                    Log.d("SCROLL_INFINITY", "load page")
-                    if (!swipeRefresh.isRefreshing)
-                        getPageListener?.invoke(adapter?.getRowsCount()?:0)
+                val lastType = adapter?.getItemViewType(adapter!!.itemCount - 1)
+                if (
+                    !isLoadingMore &&
+                    haveMore &&
+                    !swipeRefresh.isRefreshing &&
+                    visibleItemCount + pastVisiblesItems == totalItemCount &&
+                    lastType == Adapter.TYPE_LOAD_MORE
+                ) {
+                    val index = adapter?.getRowsCount() ?: 0
+                    Log.d("SCROLL_INFINITY", "load index $index")
+                    isLoadingMore = true
+                    getPageListener?.invoke(index)
                 }
             }
         })
@@ -138,8 +146,8 @@ class PaginatedRecyclerView
 
 
         companion object {
-            private val TYPE_EMPTY: Int = -1
-            private val TYPE_ERROR: Int = -2
+            internal val TYPE_EMPTY: Int = -1
+            internal val TYPE_ERROR: Int = -2
             internal val TYPE_LOAD_MORE: Int = -3
         }
 
@@ -152,6 +160,8 @@ class PaginatedRecyclerView
                         val type = getItemViewType(0)
                         field?.internalLayoutManager = if(type == TYPE_EMPTY || type == TYPE_ERROR)
                             field?.SINGLE_LAYOUT_MANAGER else field?.layoutManager
+                        field?.isLoadingMore = false
+                        field?.refreshing = false
                     }
                 })
             }
@@ -166,14 +176,13 @@ class PaginatedRecyclerView
             notifyDataSetChanged()
         }
 
-        final override fun getItemCount(): Int = getRowsCount() + if(view?.haveMore == true) 1 else 0
+        final override fun getItemCount(): Int = Math.max(getRowsCount() + if(view?.haveMore == true) 1 else 0, 1)
 
         final override fun getItemViewType(position: Int): Int {
             val rowsCount = getRowsCount()
             if(rowsCount == 0 && position == 0) {
                 view?.internalLayoutManager = view?.SINGLE_LAYOUT_MANAGER
                 val type = if (showingError) TYPE_ERROR else TYPE_EMPTY
-                showingError = false
                 return type
             }
             view?.internalLayoutManager = view?.layoutManager
