@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         paginatedRecycler.getPageListener = getPage@{ index: Int ->
             getRandomData(index) { data ->
+                Log.d("DATA!", "${data?.size}")
                 if (data != null) {
                     adapter.append(data)
                     paginatedRecycler.haveMore = !data.isEmpty() && adapter.getRowsCount() < 40

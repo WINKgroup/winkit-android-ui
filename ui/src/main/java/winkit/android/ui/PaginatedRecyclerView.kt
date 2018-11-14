@@ -96,10 +96,7 @@ class PaginatedRecyclerView
         recyclerView = root.findViewById(R.id.recycler_view)
         swipeRefresh = root.findViewById(R.id.swipe_refresh_layout)
 
-        swipeRefresh.setOnRefreshListener {
-            adapter?.clean()
-            getPageListener?.invoke(0)
-        }
+        swipeRefresh.setOnRefreshListener { requestFirstPage() }
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -137,6 +134,13 @@ class PaginatedRecyclerView
                 }
             }
         })
+    }
+
+    fun requestFirstPage () {
+        if(refreshing) return
+        refreshing = true
+        adapter?.clean()
+        getPageListener?.invoke(0)
     }
 
     abstract class Adapter<VH: RecyclerView.ViewHolder> (
@@ -182,8 +186,7 @@ class PaginatedRecyclerView
             val rowsCount = getRowsCount()
             if(rowsCount == 0 && position == 0) {
                 view?.internalLayoutManager = view?.SINGLE_LAYOUT_MANAGER
-                val type = if (showingError) TYPE_ERROR else TYPE_EMPTY
-                return type
+                return if (showingError) TYPE_ERROR else TYPE_EMPTY
             }
             view?.internalLayoutManager = view?.layoutManager
             return if(position == rowsCount) TYPE_LOAD_MORE else getRowViewType(position)
@@ -201,7 +204,10 @@ class PaginatedRecyclerView
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is EmptyViewHolder -> bindEmptyView(view?.emptyTitle, view?.emptySubtitle, view?.emptyIcon?:0, holder.itemView)
-                is ErrorViewHolder -> bindErrorView(errorMessage, view?.errorIcon?:0, holder.itemView)
+                is ErrorViewHolder -> {
+                    bindErrorView(errorMessage, view?.errorIcon?:0, holder.itemView)
+                    showingError = false
+                }
                 is LoadMoreViewHolder -> view?.layoutManager?.let { holder.configOrientation(it) }
                 else -> {
                     if(holder as? VH != null) {
@@ -215,7 +221,7 @@ class PaginatedRecyclerView
         internal fun notifyError () = notifyType(TYPE_ERROR)
         private fun notifyType (type: Int) {
             if(getItemViewType(0) == type)
-                notifyItemChanged(0)
+                notifyItemInserted(0)
         }
 
         open fun bindEmptyView(title: String?, subtitle: String?, @DrawableRes image: Int, view: View) {
@@ -252,6 +258,8 @@ class PaginatedRecyclerView
                 else  iconView.setImageDrawable(null)
                 iconView.visibility = if(image != 0) View.VISIBLE else View.GONE
             }
+
+            view.findViewById<View>(R.id.error_retry_button).setOnClickListener { this.view?.requestFirstPage()}
         }
 
         open fun getRowViewType(position: Int): Int = 0
