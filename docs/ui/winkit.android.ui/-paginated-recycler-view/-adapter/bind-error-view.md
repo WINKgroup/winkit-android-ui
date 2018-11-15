@@ -1,10 +1,5 @@
----
-title: PaginatedRecyclerView.Adapter.bindErrorView - ui
-layout: api
----
-
-<div class='api-docs-breadcrumbs'><a href="../../../index.html">ui</a> / <a href="../../index.html">winkit.android.ui</a> / <a href="../index.html">PaginatedRecyclerView</a> / <a href="index.html">Adapter</a> / <a href="./bind-error-view.html">bindErrorView</a></div>
+[ui](../../../index.md) / [winkit.android.ui](../../index.md) / [PaginatedRecyclerView](../index.md) / [Adapter](index.md) / [bindErrorView](./bind-error-view.md)
 
 # bindErrorView
 
-<div class="signature"><code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">bindErrorView</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindErrorView(kotlin.String, kotlin.Int, android.view.View)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="identifier">@DrawableRes</span> <span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindErrorView(kotlin.String, kotlin.Int, android.view.View)/image">image</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindErrorView(kotlin.String, kotlin.Int, android.view.View)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
+`open fun bindErrorView(title: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, @DrawableRes image: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

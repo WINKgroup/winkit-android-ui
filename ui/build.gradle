@@ -44,7 +44,7 @@ repositories {
 
 
 dokka {
-    outputFormat = 'kotlin-website'
+    outputFormat = 'gfm'
     outputDirectory = "./docs"
     linkMapping {
         dir = "src/main/java"

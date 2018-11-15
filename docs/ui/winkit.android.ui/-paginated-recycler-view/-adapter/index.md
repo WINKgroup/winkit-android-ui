@@ -1,211 +1,35 @@
----
-title: PaginatedRecyclerView.Adapter - ui
-layout: api
----
-
-<div class='api-docs-breadcrumbs'><a href="../../../index.html">ui</a> / <a href="../../index.html">winkit.android.ui</a> / <a href="../index.html">PaginatedRecyclerView</a> / <a href="./index.html">Adapter</a></div>
+[ui](../../../index.md) / [winkit.android.ui](../../index.md) / [PaginatedRecyclerView](../index.md) / [Adapter](./index.md)
 
 # Adapter
 
-<div class="signature"><code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Adapter</span><span class="symbol">&lt;</span><span class="identifier">VH</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Adapter</span><span class="symbol">&lt;</span><span class="identifier">ViewHolder</span><span class="symbol">&gt;</span></code></div>
+`abstract class Adapter<VH : ViewHolder> : Adapter<ViewHolder>`
 
 ### Constructors
 
-<table class="api-docs-table">
-<tbody>
-<tr>
-<td markdown="1">
-
-<a href="-init-.html">&lt;init&gt;</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="identifier">Adapter</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$<init>(kotlin.Int, kotlin.Int)/emptyLayout">emptyLayout</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;R.layout.view_paginated_recycler_empty<span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$<init>(kotlin.Int, kotlin.Int)/errorLayout">errorLayout</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;R.layout.view_paginated_recycler_error<span class="symbol">)</span></code></div>
-
-</td>
-</tr>
-</tbody>
-</table>
+| Name | Summary |
+|---|---|
+| [&lt;init&gt;](-init-.md) | `Adapter(emptyLayout: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = R.layout.view_paginated_recycler_empty, errorLayout: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = R.layout.view_paginated_recycler_error)` |
 
 ### Properties
 
-<table class="api-docs-table">
-<tbody>
-<tr>
-<td markdown="1">
-
-<a href="empty-layout.html">emptyLayout</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">val </span><span class="identifier">emptyLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="error-layout.html">errorLayout</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">val </span><span class="identifier">errorLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></div>
-
-</td>
-</tr>
-</tbody>
-</table>
+| Name | Summary |
+|---|---|
+| [emptyLayout](empty-layout.md) | `val emptyLayout: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [errorLayout](error-layout.md) | `val errorLayout: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
 
 ### Functions
 
-<table class="api-docs-table">
-<tbody>
-<tr>
-<td markdown="1">
-
-<a href="bind-empty-view.html">bindEmptyView</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">bindEmptyView</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindEmptyView(kotlin.String, kotlin.String, kotlin.Int, android.view.View)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindEmptyView(kotlin.String, kotlin.String, kotlin.Int, android.view.View)/subtitle">subtitle</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindEmptyView(kotlin.String, kotlin.String, kotlin.Int, android.view.View)/image">image</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindEmptyView(kotlin.String, kotlin.String, kotlin.Int, android.view.View)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="bind-error-view.html">bindErrorView</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">bindErrorView</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindErrorView(kotlin.String, kotlin.Int, android.view.View)/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindErrorView(kotlin.String, kotlin.Int, android.view.View)/image">image</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$bindErrorView(kotlin.String, kotlin.Int, android.view.View)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="clean.html">clean</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">clean</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="get-item-count.html">getItemCount</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">fun </span><span class="identifier">getItemCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="get-item-view-type.html">getItemViewType</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">fun </span><span class="identifier">getItemViewType</span><span class="symbol">(</span><span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$getItemViewType(kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="get-row-view-type.html">getRowViewType</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">getRowViewType</span><span class="symbol">(</span><span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$getRowViewType(kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="get-rows-count.html">getRowsCount</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getRowsCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="on-bind-row-view-holder.html">onBindRowViewHolder</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onBindRowViewHolder</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onBindRowViewHolder(winkit.android.ui.PaginatedRecyclerView.Adapter.VH, kotlin.Int)/holder">holder</span><span class="symbol">:</span>&nbsp;<a href="index.html#VH"><span class="identifier">VH</span></a><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onBindRowViewHolder(winkit.android.ui.PaginatedRecyclerView.Adapter.VH, kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="on-bind-view-holder.html">onBindViewHolder</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onBindViewHolder</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, kotlin.Int)/holder">holder</span><span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="on-create-row-view-holder.html">onCreateRowViewHolder</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">onCreateRowViewHolder</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onCreateRowViewHolder(android.view.ViewGroup, kotlin.Int)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onCreateRowViewHolder(android.view.ViewGroup, kotlin.Int)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><a href="index.html#VH"><span class="identifier">VH</span></a></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="on-create-view-holder.html">onCreateViewHolder</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">fun </span><span class="identifier">onCreateViewHolder</span><span class="symbol">(</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/p1">p1</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><br/><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ViewHolder</span></code></div>
-
-</td>
-</tr>
-<tr>
-<td markdown="1">
-
-<a href="show-error.html">showError</a>
-
-
-</td>
-<td markdown="1">
-<div class="signature"><code><span class="keyword">fun </span><span class="identifier">showError</span><span class="symbol">(</span><span class="parameterName" id="winkit.android.ui.PaginatedRecyclerView.Adapter$showError(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></div>
-
-</td>
-</tr>
-</tbody>
-</table>
+| Name | Summary |
+|---|---|
+| [bindEmptyView](bind-empty-view.md) | `open fun bindEmptyView(title: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, subtitle: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, image: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [bindErrorView](bind-error-view.md) | `open fun bindErrorView(title: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?, image: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [clean](clean.md) | `abstract fun clean(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [getItemCount](get-item-count.md) | `fun getItemCount(): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [getItemViewType](get-item-view-type.md) | `fun getItemViewType(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [getRowViewType](get-row-view-type.md) | `open fun getRowViewType(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [getRowsCount](get-rows-count.md) | `abstract fun getRowsCount(): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [onBindRowViewHolder](on-bind-row-view-holder.md) | `abstract fun onBindRowViewHolder(holder: `[`VH`](index.md#VH)`, position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [onBindViewHolder](on-bind-view-holder.md) | `open fun onBindViewHolder(holder: ViewHolder, position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [onCreateRowViewHolder](on-create-row-view-holder.md) | `abstract fun onCreateRowViewHolder(parent: `[`ViewGroup`](https://developer.android.com/reference/android/view/ViewGroup.html)`, type: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`VH`](index.md#VH) |
+| [onCreateViewHolder](on-create-view-holder.md) | `fun onCreateViewHolder(parent: `[`ViewGroup`](https://developer.android.com/reference/android/view/ViewGroup.html)`, p1: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): ViewHolder` |
+| [showError](show-error.md) | `fun showError(message: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
