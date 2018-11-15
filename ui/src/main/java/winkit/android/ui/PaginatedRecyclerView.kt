@@ -18,7 +18,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 
 /**
- * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature.
+ * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature. <p>
  * This view ask in a callback the pages and allow to implement the "no data" and "error" state.
  *
  * @attr ref R.styleable#PaginatedRecyclerView
