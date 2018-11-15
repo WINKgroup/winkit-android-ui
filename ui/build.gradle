@@ -46,4 +46,9 @@ repositories {
 dokka {
     outputFormat = 'kotlin-website'
     outputDirectory = "./docs"
+    linkMapping {
+        dir = "src/main/java"
+        url = "https://github.com/WINKgroup/winkit-android-ui/tree/master/ui/src/main/java"
+        suffix = "#L"
+    }
 }
