@@ -19,20 +19,13 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     val adapter: MainActivity.Adapter = MainActivity.Adapter()
-    var currentCall: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         paginatedRecycler.layoutManager = LinearLayoutManager(this)
-
         paginatedRecycler.adapter = adapter
-        paginatedRecycler.emptyTitle = "Nessun Risultato"
-        paginatedRecycler.emptySubtitle = "Sottotitolo nessun contenuto"
-        paginatedRecycler.emptyIcon = R.drawable.abc_btn_radio_material
-        paginatedRecycler.errorIcon = R.drawable.notification_icon_background
-
         paginatedRecycler.getPageListener = getPage@{ index: Int ->
             getRandomData(index) { data ->
                 Log.d("DATA!", "${data?.size}")
@@ -44,10 +37,14 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     if(index == 0)
                         adapter.showError("Errore di connessione")
-                    else Toast.makeText(this, "Errore di connessione", Toast.LENGTH_SHORT).show()
+                    else {
+                        paginatedRecycler.haveMore = false
+                        Toast.makeText(this, "Errore di connessione", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
+        //adapter.notifyDataSetChanged()
 
     }
 
@@ -73,11 +70,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getRandomData (index: Int, call: (data: List<String>?) -> Unit){
         Handler().postDelayed({
-            if(Math.random() > 0.7) {
+            if(index != 0) {//if(Math.random() > 0.7) {
                 call(null)
             } else {
                 val result = ArrayList<String>()
-                if (Math.random() < 0.6 || index > 0) {
+                if (Math.random() < 5) {
                     for (i in 1..15) {
                         val id = i + index
                         result.add("Row Item $id")

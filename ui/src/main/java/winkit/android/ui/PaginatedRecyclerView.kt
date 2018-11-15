@@ -17,7 +17,13 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 
-
+/**
+ * This class has no useful logic; it's just a documentation example.
+ *
+ * @param T the type of a member in this group.
+ * @property name the name of this group.
+ * @constructor Creates an empty group.
+ */
 class PaginatedRecyclerView
     @JvmOverloads constructor( context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
         :FrameLayout (context, attrs, defStyleAttr) {
@@ -70,8 +76,9 @@ class PaginatedRecyclerView
         set(value) {
             value?.view = this
             recyclerView.adapter = value
+            adapter?.notifyDataSetChanged()
         }
-        get() = recyclerView.adapter as Adapter<*>
+        get() = recyclerView.adapter as? Adapter<*>
 
     internal val SINGLE_LAYOUT_MANAGER = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
@@ -97,6 +104,15 @@ class PaginatedRecyclerView
         swipeRefresh = root.findViewById(R.id.swipe_refresh_layout)
 
         swipeRefresh.setOnRefreshListener { requestFirstPage() }
+
+        val ta = getContext().obtainStyledAttributes(attrs, R.styleable.PaginatedRecyclerView)
+        if (ta != null) {
+            emptyTitle = ta.getString(R.styleable.PaginatedRecyclerView_empty_title)
+            emptySubtitle = ta.getString(R.styleable.PaginatedRecyclerView_empty_subtitle)
+            emptyIcon = ta.getResourceId(R.styleable.PaginatedRecyclerView_empty_icon, 0)
+            errorIcon = ta.getResourceId(R.styleable.PaginatedRecyclerView_error_icon, 0)
+            ta.recycle()
+        }
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -148,13 +164,11 @@ class PaginatedRecyclerView
             @LayoutRes val errorLayout: Int = R.layout.view_paginated_recycler_error
     ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
         companion object {
             internal val TYPE_EMPTY: Int = -1
             internal val TYPE_ERROR: Int = -2
             internal val TYPE_LOAD_MORE: Int = -3
         }
-
 
         internal var view: PaginatedRecyclerView? = null
             set(value) {
@@ -221,7 +235,7 @@ class PaginatedRecyclerView
         internal fun notifyError () = notifyType(TYPE_ERROR)
         private fun notifyType (type: Int) {
             if(getItemViewType(0) == type)
-                notifyItemInserted(0)
+                notifyDataSetChanged()
         }
 
         open fun bindEmptyView(title: String?, subtitle: String?, @DrawableRes image: Int, view: View) {

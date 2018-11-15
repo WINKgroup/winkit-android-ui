@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PaginatedRecyclerView">
+        <attr name="empty_title" format="string"/>
+        <attr name="empty_subtitle" format="string" />
+        <attr name="empty_icon" format="reference" />
+        <attr name="error_icon" format="reference" />
+    </declare-styleable>
+</resources>
