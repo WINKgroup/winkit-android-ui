@@ -45,5 +45,5 @@ repositories {
 
 dokka {
     outputFormat = 'kotlin-website'
-    outputDirectory = "./documentation"
+    outputDirectory = "./docs"
 }

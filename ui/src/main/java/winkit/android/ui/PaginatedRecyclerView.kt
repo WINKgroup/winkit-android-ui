@@ -18,34 +18,53 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 
 /**
- * This class has no useful logic; it's just a documentation example.
+ * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature.
+ * This view ask in a callback the pages and allow to implement the "no data" and "error" state.
  *
- * @param T the type of a member in this group.
- * @property name the name of this group.
- * @constructor Creates an empty group.
+ * @attr ref R.styleable#PaginatedRecyclerView
  */
 class PaginatedRecyclerView
     @JvmOverloads constructor( context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
         :FrameLayout (context, attrs, defStyleAttr) {
 
+    /**
+     * The title to show in "no data" case.
+     *
+     * @attr ref android.R.styleable#PaginatedRecyclerView_empty_title
+     */
     var emptyTitle: String? = null
         set(value) {
             field = value
             adapter?.notifyEmpty()
         }
 
+    /**
+     * The subtitle to show in "no data" case.
+     *
+     * @attr ref android.R.styleable#PaginatedRecyclerView_empty_subtitle
+     */
     var emptySubtitle: String? = null
         set(value) {
             field = value
             adapter?.notifyEmpty()
         }
 
+    /**
+     * The icon drawable resource to show in "no data" case.
+     *
+     * @attr ref android.R.styleable#PaginatedRecyclerView_empty_icon
+     */
     @DrawableRes var emptyIcon: Int = 0
         set(value) {
             field = value
             adapter?.notifyEmpty()
         }
 
+    /**
+     * The icon drawable resource to show in "error" case.
+     *
+     * @attr ref android.R.styleable#PaginatedRecyclerView_error_icon
+     */
     @DrawableRes var errorIcon: Int = 0
         set(value) {
             field = value
@@ -53,6 +72,11 @@ class PaginatedRecyclerView
         }
 
 
+    /**
+     * SwipeRefresh view progress visibility
+     *
+     * @see SwipeRefreshLayout.isRefreshing
+     */
     var refreshing: Boolean = false
         set(value) { swipeRefresh.isRefreshing = value }
 
@@ -64,6 +88,12 @@ class PaginatedRecyclerView
     private var totalItemCount: Int = 0
     private var pastVisiblesItems: Int = 0
     private var isLoadingMore: Boolean = false
+
+    /**
+     * LoadMore availability
+     * <p>
+     * To use after loading the last page or in case of connection errors after the first page
+     */
     var haveMore: Boolean = true
         set(value) {
             if( field == value) return
@@ -72,6 +102,11 @@ class PaginatedRecyclerView
             else adapter?.notifyItemInserted(adapter!!.itemCount)
         }
 
+    /**
+     * Adapter instance to bind
+     *
+     * @see Adapter
+     */
     var adapter: Adapter<*>?
         set(value) {
             value?.view = this
@@ -80,8 +115,15 @@ class PaginatedRecyclerView
         }
         get() = recyclerView.adapter as? Adapter<*>
 
-    internal val SINGLE_LAYOUT_MANAGER = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    internal val SINGLE_LAYOUT_MANAGER = LinearLayoutManager(context)
 
+    /**
+     * The wrapped recyclerView's layout manager
+     * <p>
+     * Default value: [LinearLayoutManager]
+     *
+     * @see RecyclerView.LayoutManager
+     */
     var layoutManager: RecyclerView.LayoutManager? = SINGLE_LAYOUT_MANAGER
         set(value) {
             field = value
@@ -95,12 +137,18 @@ class PaginatedRecyclerView
             }
         }
 
-
+    /**
+     * Callback to notify the user loadMore of pullToRefresh action
+     * <p>
+     * @param index Loaded data size
+     */
     var getPageListener: ((index: Int) -> Unit)? = null
 
     init {
         val root = LayoutInflater.from(context).inflate(R.layout.view_paginated_recycler, this)
         recyclerView = root.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = SINGLE_LAYOUT_MANAGER
+
         swipeRefresh = root.findViewById(R.id.swipe_refresh_layout)
 
         swipeRefresh.setOnRefreshListener { requestFirstPage() }
@@ -152,6 +200,9 @@ class PaginatedRecyclerView
         })
     }
 
+    /**
+     * Clean the data and request the first page (like the user pullToRefresh action), [getPageListener] will be called with index 0.
+     */
     fun requestFirstPage () {
         if(refreshing) return
         refreshing = true

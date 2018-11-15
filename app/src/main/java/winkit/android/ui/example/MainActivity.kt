@@ -18,13 +18,12 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val adapter: MainActivity.Adapter = MainActivity.Adapter()
+    private val adapter: MainActivity.Adapter = MainActivity.Adapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        paginatedRecycler.layoutManager = LinearLayoutManager(this)
         paginatedRecycler.adapter = adapter
         paginatedRecycler.getPageListener = getPage@{ index: Int ->
             getRandomData(index) { data ->
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        //adapter.notifyDataSetChanged()
+        paginatedRecycler.requestFirstPage()
 
     }
 

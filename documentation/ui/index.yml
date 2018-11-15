@@ -1,0 +1,125 @@
+- title: ui
+  url: ./documentation/ui/index.html
+  content:
+    - title: alltypes
+      url: ./documentation/ui/alltypes/index.html
+      content:
+        - title: PaginatedRecyclerView
+          url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/index.html
+          content:
+            - title: PaginatedRecyclerView
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-init-.html
+            - title: Adapter
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/index.html
+              content:
+                - title: Adapter
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/-init-.html
+                - title: bindEmptyView
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/bind-empty-view.html
+                - title: bindErrorView
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/bind-error-view.html
+                - title: clean
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/clean.html
+                - title: emptyLayout
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/empty-layout.html
+                - title: errorLayout
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/error-layout.html
+                - title: getItemCount
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-item-count.html
+                - title: getItemViewType
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-item-view-type.html
+                - title: getRowViewType
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-row-view-type.html
+                - title: getRowsCount
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-rows-count.html
+                - title: onBindRowViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-bind-row-view-holder.html
+                - title: onBindViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-bind-view-holder.html
+                - title: onCreateRowViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-create-row-view-holder.html
+                - title: onCreateViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-create-view-holder.html
+                - title: showError
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/show-error.html
+            - title: adapter
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/adapter.html
+            - title: emptyIcon
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/empty-icon.html
+            - title: emptySubtitle
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/empty-subtitle.html
+            - title: emptyTitle
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/empty-title.html
+            - title: errorIcon
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/error-icon.html
+            - title: getPageListener
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/get-page-listener.html
+            - title: haveMore
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/have-more.html
+            - title: layoutManager
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/layout-manager.html
+            - title: refreshing
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/refreshing.html
+            - title: requestFirstPage
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/request-first-page.html
+    - title: winkit.android.ui
+      url: ./documentation/ui/winkit.android.ui/index.html
+      content:
+        - title: PaginatedRecyclerView
+          url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/index.html
+          content:
+            - title: PaginatedRecyclerView
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-init-.html
+            - title: Adapter
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/index.html
+              content:
+                - title: Adapter
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/-init-.html
+                - title: bindEmptyView
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/bind-empty-view.html
+                - title: bindErrorView
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/bind-error-view.html
+                - title: clean
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/clean.html
+                - title: emptyLayout
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/empty-layout.html
+                - title: errorLayout
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/error-layout.html
+                - title: getItemCount
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-item-count.html
+                - title: getItemViewType
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-item-view-type.html
+                - title: getRowViewType
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-row-view-type.html
+                - title: getRowsCount
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/get-rows-count.html
+                - title: onBindRowViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-bind-row-view-holder.html
+                - title: onBindViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-bind-view-holder.html
+                - title: onCreateRowViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-create-row-view-holder.html
+                - title: onCreateViewHolder
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/on-create-view-holder.html
+                - title: showError
+                  url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/-adapter/show-error.html
+            - title: adapter
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/adapter.html
+            - title: emptyIcon
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/empty-icon.html
+            - title: emptySubtitle
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/empty-subtitle.html
+            - title: emptyTitle
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/empty-title.html
+            - title: errorIcon
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/error-icon.html
+            - title: getPageListener
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/get-page-listener.html
+            - title: haveMore
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/have-more.html
+            - title: layoutManager
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/layout-manager.html
+            - title: refreshing
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/refreshing.html
+            - title: requestFirstPage
+              url: ./documentation/ui/winkit.android.ui/-paginated-recycler-view/request-first-page.html
