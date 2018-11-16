@@ -18,7 +18,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter = MainActivity.CustomLayoutAdapter()
+    private val adapter = MainActivity.Adapter  ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                 } else {
                     if(index == 0)
-                        adapter.showError("Errore di connessione")
+                        adapter.showError("Connection error")
                     else {
                         paginatedRecycler.haveMore = false
-                        Toast.makeText(this, "Errore di connessione", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
