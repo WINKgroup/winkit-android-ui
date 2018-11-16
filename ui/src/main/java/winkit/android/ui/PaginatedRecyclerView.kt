@@ -18,7 +18,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 
 /**
- * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature. <p>
+ * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature.
  * This view ask in a callback the pages and allow to implement the "no data" and "error" state.
  *
  * @attr ref R.styleable#PaginatedRecyclerView
@@ -210,6 +210,12 @@ class PaginatedRecyclerView
         getPageListener?.invoke(0)
     }
 
+    /**
+     * Adapter abstraction to provide data to [PaginatedRecyclerView]
+     *
+     * @param emptyLayout The empty layout resource
+     * @param errorLayout The error layout resource
+     */
     abstract class Adapter<VH: RecyclerView.ViewHolder> (
             @LayoutRes val emptyLayout: Int = R.layout.view_paginated_recycler_empty,
             @LayoutRes val errorLayout: Int = R.layout.view_paginated_recycler_error
@@ -238,6 +244,11 @@ class PaginatedRecyclerView
         private var showingError: Boolean = false
         private var errorMessage: String? = null
 
+        /**
+         * Clean the data and showing the "error" view with the selected message.
+         *
+         * @param message The message to show
+         */
         fun showError (message: String) {
             showingError = true
             errorMessage = message
@@ -266,7 +277,7 @@ class PaginatedRecyclerView
             }
 
         @Suppress("UNCHECKED_CAST")
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        final override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is EmptyViewHolder -> bindEmptyView(view?.emptyTitle, view?.emptySubtitle, view?.emptyIcon?:0, holder.itemView)
                 is ErrorViewHolder -> {
@@ -289,6 +300,14 @@ class PaginatedRecyclerView
                 notifyDataSetChanged()
         }
 
+        /**
+         * Executed before show the empty data message. Override in case of custom layouts or binding implementation.
+         *
+         * @param title The [PaginatedRecyclerView.emptyTitle]
+         * @param subtitle The [PaginatedRecyclerView.emptySubtitle]
+         * @param image The [PaginatedRecyclerView.emptyIcon]
+         * @param view The inflated [emptyLayout] layout resource
+         */
         open fun bindEmptyView(title: String?, subtitle: String?, @DrawableRes image: Int, view: View) {
             val titleView = view.findViewById<TextView>(R.id.empty_title)
             if (titleView != null) {
@@ -310,11 +329,18 @@ class PaginatedRecyclerView
             }
         }
 
-        open fun bindErrorView(title: String?, @DrawableRes image: Int, view: View) {
+        /**
+         * Executed before show the empty data message. Override in case of custom layouts or binding implementation.
+         *
+         * @param message The [showingError] message param
+         * @param image The [PaginatedRecyclerView.errorIcon]
+         * @param view The inflated [errorLayout] layout resource
+         */
+        open fun bindErrorView(message: String?, @DrawableRes image: Int, view: View) {
             val titleView = view.findViewById<TextView>(R.id.error_title)
             if (titleView != null) {
-                titleView.text = title
-                titleView.visibility = if(title != null) View.VISIBLE else View.GONE
+                titleView.text = message
+                titleView.visibility = if(message != null) View.VISIBLE else View.GONE
             }
 
             val iconView = view.findViewById<ImageView>(R.id.error_icon)
@@ -327,11 +353,38 @@ class PaginatedRecyclerView
             view.findViewById<View>(R.id.error_retry_button).setOnClickListener { this.view?.requestFirstPage()}
         }
 
+        /**
+         * Replace [RecyclerView.Adapter.getItemViewType]
+         *
+         * @param position
+         */
         open fun getRowViewType(position: Int): Int = 0
 
+        /**
+         * Replace [RecyclerView.Adapter.getItemCount]
+         */
         abstract fun getRowsCount(): Int
+
+        /**
+         * Perform the data clean
+         */
         abstract fun clean()
+
+        /**
+         * Replace [RecyclerView.Adapter.onCreateViewHolder]
+         *
+         * @param parent
+         * @param type
+         */
         abstract fun onCreateRowViewHolder (parent: ViewGroup, type: Int): VH
+
+
+        /**
+         * Replace [RecyclerView.Adapter.onBindViewHolder]
+         *
+         * @param holder
+         * @param position
+         */
         abstract fun onBindRowViewHolder (holder: VH, position: Int)
 
         private open class InternalHolder(parent: ViewGroup, layout: Int): RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layout, parent, false))
