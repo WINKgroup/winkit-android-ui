@@ -21,10 +21,8 @@ import android.util.Log
  * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature.
  * This recyclerView ask in a callback the pages and allow to implement the "no data" and "error" state.
  *
- * @attr ref R.styleable#PaginatedRecyclerView
  *
- *
- * @sample ```
+ * ```
     paginatedRecycler.getPageListener = getPage@{ index: Int ->
         getHttpData(index) { data -> // connection error on data == null
 
@@ -45,6 +43,8 @@ import android.util.Log
     paginatedRecycler.requestFirstPage()
  * ```
  *
+ *
+ * @attr ref R.styleable#PaginatedRecyclerView
  */
 class PaginatedRecyclerView
     @JvmOverloads constructor( context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -236,11 +236,9 @@ class PaginatedRecyclerView
     /**
      * Adapter abstraction to provide data to [PaginatedRecyclerView]
      *
-     * @param emptyLayout The empty layout resource
-     * @param errorLayout The error layout resource
      *
      * Example without define custom empty or error layouts
-     * @sample ```
+     * ```
         class MyCustomAdapter: PaginatedRecyclerView.Adapter<Adapter.Holder>() {
 
             override fun onBindRowViewHolder(holder: Holder, position: Int) = holder.bind(data[position])
@@ -265,7 +263,7 @@ class PaginatedRecyclerView
      *
      *
      * Example without defining custom empty or error layouts
-     * @sample ```
+     * ```
         class CustomLayoutAdapter: PaginatedRecyclerView.Adapter<CustomLayoutAdapter.Holder>(
             errorLayout = R.layout.custom_error_layout,
             emptyLayout = R.layout.custom_empty_layout
@@ -313,6 +311,9 @@ class PaginatedRecyclerView
             }
         }
      * ```
+     *
+     * @param emptyLayout The empty layout resource
+     * @param errorLayout The error layout resource
      */
     abstract class Adapter<VH: RecyclerView.ViewHolder> (
             @LayoutRes val emptyLayout: Int = R.layout.view_paginated_recycler_empty,

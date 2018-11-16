@@ -6,5 +6,3 @@
 
 The error layout resource
 
-Example without define custom empty or error layouts
-
