@@ -10,24 +10,7 @@ Complete documentation [Here](https://winkgroup.github.io/winkit-android-ui/ui/w
 
 ### Install
 
-**1** Add the JitPack repository to your root build.gradle at the end of repositories
-
-```groovy
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-  }
-}
-```
-
-**2** Add the dependency
-
-```groovy
-dependencies {
-	implementation 'com.github.WINKgroup:winkit-android-okcore:0.0.1'
-}
-```
+No release made (work in progress).
 
 ## Views
 
