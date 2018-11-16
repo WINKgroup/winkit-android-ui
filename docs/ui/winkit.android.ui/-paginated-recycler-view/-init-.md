@@ -9,21 +9,21 @@ This recyclerView ask in a callback the pages and allow to implement the "no dat
 
 ```
 paginatedRecycler.getPageListener = getPage@{ index: Int ->
-getHttpData(index) { data -> // connection error on data == null
+    getHttpData(index) { data -> // connection error on data == null
 
-if (data != null) {
-adapter.append(data)
-paginatedRecycler.haveMore = data.size < TOTAL_SIZE
-adapter.notifyDataSetChanged()
-} else {
-if(index == 0)
-adapter.showError("Connection error on first page")
-else {
-paginatedRecycler.haveMore = false
-Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show()
-}
-}
-}
+        if (data != null) {
+            adapter.append(data)
+            paginatedRecycler.haveMore = data.size < TOTAL_SIZE
+            adapter.notifyDataSetChanged()
+        } else {
+            if(index == 0)
+                adapter.showError("Connection error on first page")
+            else {
+                paginatedRecycler.haveMore = false
+                Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }
 paginatedRecycler.requestFirstPage()
 ```
