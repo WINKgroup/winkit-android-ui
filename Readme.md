@@ -1,4 +1,4 @@
-<div style="text-align:center"><img style="height:256px; width:256px" src="img/logo.png"/></div>
+<p align="center"><img width="40%" src="img/logo.png"/></p>
 
 # Winkit Ui
 
@@ -36,11 +36,11 @@ dependencies {
 ###PaginatedRecyclerView [docs](https://winkgroup.github.io/winkit-android-ui/ui/winkit.android.ui/-paginated-recycler-view/) 
 An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature. This recyclerView ask in a callback the pages and allow to implement the “no data” and “error” state.
 
-<div style="text-align:center">
-	<img style="height:400px;" src="img/PaginatedRecyclerView_3.png"/>
-	<img style="height:400px;" src="img/PaginatedRecyclerView_2.png"/>
-	<img style="height:400px;" src="img/PaginatedRecyclerView_1.png"/>
-</div>
+<p align="center">
+	<img width="30%" src="img/PaginatedRecyclerView_3.png"/>
+	<img width="30%" src="img/PaginatedRecyclerView_2.png"/>
+	<img width="30%" src="img/PaginatedRecyclerView_1.png"/>
+</p>
 
 Xml declaration:
 
