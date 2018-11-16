@@ -5,7 +5,11 @@
 `class PaginatedRecyclerView : `[`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout.html)
 
 An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature.
-This view ask in a callback the pages and allow to implement the "no data" and "error" state.
+This recyclerView ask in a callback the pages and allow to implement the "no data" and "error" state.
+
+``` kotlin
+//Missing function name in @sample
+```
 
 **Attr**
 ref R.styleable#PaginatedRecyclerView
@@ -14,13 +18,13 @@ ref R.styleable#PaginatedRecyclerView
 
 | Name | Summary |
 |---|---|
-| [Adapter](-adapter/index.md) | `abstract class Adapter<VH : ViewHolder> : Adapter<ViewHolder>` |
+| [Adapter](-adapter/index.md) | `abstract class Adapter<VH : ViewHolder> : Adapter<ViewHolder>`<br>Adapter abstraction to provide data to [PaginatedRecyclerView](./index.md) |
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `PaginatedRecyclerView(context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`, attrs: `[`AttributeSet`](https://developer.android.com/reference/android/util/AttributeSet.html)`? = null, defStyleAttr: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0)`<br>An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature. This view ask in a callback the pages and allow to implement the "no data" and "error" state. |
+| [&lt;init&gt;](-init-.md) | `PaginatedRecyclerView(context: `[`Context`](https://developer.android.com/reference/android/content/Context.html)`, attrs: `[`AttributeSet`](https://developer.android.com/reference/android/util/AttributeSet.html)`? = null, defStyleAttr: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)` = 0)`<br>An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature. This recyclerView ask in a callback the pages and allow to implement the "no data" and "error" state. |
 
 ### Properties
 
@@ -34,7 +38,7 @@ ref R.styleable#PaginatedRecyclerView
 | [getPageListener](get-page-listener.md) | `var getPageListener: (index: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`) -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Callback to notify the user loadMore of pullToRefresh action |
 | [haveMore](have-more.md) | `var haveMore: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)<br>LoadMore availability |
 | [layoutManager](layout-manager.md) | `var layoutManager: LayoutManager?`<br>The wrapped recyclerView's layout manager |
-| [refreshing](refreshing.md) | `var refreshing: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)<br>SwipeRefresh view progress visibility |
+| [refreshing](refreshing.md) | `var refreshing: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)<br>SwipeRefresh recyclerView progress visibility |
 
 ### Functions
 

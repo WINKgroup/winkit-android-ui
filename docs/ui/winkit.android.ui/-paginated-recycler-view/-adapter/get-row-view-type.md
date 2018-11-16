@@ -3,3 +3,9 @@
 # getRowViewType
 
 `open fun getRowViewType(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
+
+Replace [RecyclerView.Adapter.getItemViewType](#)
+
+### Parameters
+
+`position` - 

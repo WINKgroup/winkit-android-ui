@@ -4,7 +4,7 @@
 
 `var refreshing: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
-SwipeRefresh view progress visibility
+SwipeRefresh recyclerView progress visibility
 
 **See Also**
 

@@ -3,3 +3,6 @@
 # clean
 
 `abstract fun clean(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+Perform the data clean
+

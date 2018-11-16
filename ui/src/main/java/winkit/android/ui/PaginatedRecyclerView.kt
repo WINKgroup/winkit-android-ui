@@ -19,9 +19,32 @@ import android.util.Log
 
 /**
  * An helpful View that implement a RecyclerView with pullToRefresh and Loadmore feature.
- * This view ask in a callback the pages and allow to implement the "no data" and "error" state.
+ * This recyclerView ask in a callback the pages and allow to implement the "no data" and "error" state.
  *
  * @attr ref R.styleable#PaginatedRecyclerView
+ *
+ *
+ * @sample ```
+    paginatedRecycler.getPageListener = getPage@{ index: Int ->
+        getHttpData(index) { data -> // connection error on data == null
+
+            if (data != null) {
+                adapter.append(data)
+                paginatedRecycler.haveMore = data.size < TOTAL_SIZE
+                adapter.notifyDataSetChanged()
+            } else {
+                if(index == 0)
+                    adapter.showError("Connection error on first page")
+                else {
+                    paginatedRecycler.haveMore = false
+                    Toast.makeText(this, "Connection error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+    paginatedRecycler.requestFirstPage()
+ * ```
+ *
  */
 class PaginatedRecyclerView
     @JvmOverloads constructor( context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -73,7 +96,7 @@ class PaginatedRecyclerView
 
 
     /**
-     * SwipeRefresh view progress visibility
+     * SwipeRefresh recyclerView progress visibility
      *
      * @see SwipeRefreshLayout.isRefreshing
      */
@@ -109,7 +132,7 @@ class PaginatedRecyclerView
      */
     var adapter: Adapter<*>?
         set(value) {
-            value?.view = this
+            value?.recyclerView = this
             recyclerView.adapter = value
             adapter?.notifyDataSetChanged()
         }
@@ -215,6 +238,81 @@ class PaginatedRecyclerView
      *
      * @param emptyLayout The empty layout resource
      * @param errorLayout The error layout resource
+     *
+     * Example without define custom empty or error layouts
+     * @sample ```
+        class MyCustomAdapter: PaginatedRecyclerView.Adapter<Adapter.Holder>() {
+
+            override fun onBindRowViewHolder(holder: Holder, position: Int) = holder.bind(data[position])
+
+            val data: ArrayList<String> = ArrayList()
+
+            override fun getRowsCount(): Int = data.size
+
+            override fun clean() = data.clear()
+
+            override fun onCreateRowViewHolder(parent: ViewGroup, type: Int): Holder = Holder(parent)
+
+            fun append (toAppend: List<String>) = data.addAll(toAppend)
+
+            class Holder(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false)) {
+                fun bind (text: String){
+                   itemView.findViewById<TextView>(R.id.row_text)?.text = text
+                }
+            }
+        }
+     * ```
+     *
+     *
+     * Example without defining custom empty or error layouts
+     * @sample ```
+        class CustomLayoutAdapter: PaginatedRecyclerView.Adapter<CustomLayoutAdapter.Holder>(
+            errorLayout = R.layout.custom_error_layout,
+            emptyLayout = R.layout.custom_empty_layout
+        ) {
+
+            override fun onBindRowViewHolder(holder: Holder, position: Int) = holder.bind(data[position])
+
+            val data: ArrayList<String> = ArrayList()
+
+            override fun getRowsCount(): Int = data.size
+            override fun clean() = data.clear()
+
+            override fun onCreateRowViewHolder(parent: ViewGroup, type: Int): Holder = Holder(parent)
+
+            fun append(toAppend: List<String>) = data.addAll(toAppend)
+
+            class Holder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false)) {
+                fun bind(text: String) {
+                    itemView.findViewById<TextView>(R.id.row_text)?.text = text
+                }
+            }
+
+            override fun bindEmptyView(title: String?, subtitle: String?, image: Int, view: View) {
+                // Implement custom empty recyclerView logic here
+
+                val titleView = view.findViewById<TextView>(winkit.android.ui.R.id.empty_title)
+                titleView.text = "$title $subtitle"
+
+                val iconView = view.findViewById<ImageView>(winkit.android.ui.R.id.empty_icon)
+                if (image != 0) iconView.setImageResource(image)
+                else  iconView.setImageDrawable(null)
+            }
+
+            override fun bindErrorView(message: String?, image: Int, view: View) {
+                // Implement custom error recyclerView logic here
+
+                val iconView = view.findViewById<ImageView>(winkit.android.ui.R.id.error_icon)
+                if (image != 0) iconView.setImageResource(image)
+                else  iconView.setImageDrawable(null)
+                iconView.visibility = if(image != 0) View.VISIBLE else View.GONE
+
+                val button = view.findViewById<Button>(winkit.android.ui.R.id.error_retry_button)
+                button.setOnClickListener { this.recyclerView?.requestFirstPage()}
+                button.text = message
+            }
+        }
+     * ```
      */
     abstract class Adapter<VH: RecyclerView.ViewHolder> (
             @LayoutRes val emptyLayout: Int = R.layout.view_paginated_recycler_empty,
@@ -227,7 +325,7 @@ class PaginatedRecyclerView
             internal val TYPE_LOAD_MORE: Int = -3
         }
 
-        internal var view: PaginatedRecyclerView? = null
+        var recyclerView: PaginatedRecyclerView? = null
             set(value) {
                 field = value
                 registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver(){
@@ -245,7 +343,7 @@ class PaginatedRecyclerView
         private var errorMessage: String? = null
 
         /**
-         * Clean the data and showing the "error" view with the selected message.
+         * Clean the data and showing the "error" recyclerView with the selected message.
          *
          * @param message The message to show
          */
@@ -256,15 +354,15 @@ class PaginatedRecyclerView
             notifyDataSetChanged()
         }
 
-        final override fun getItemCount(): Int = Math.max(getRowsCount() + if(view?.haveMore == true) 1 else 0, 1)
+        final override fun getItemCount(): Int = Math.max(getRowsCount() + if(recyclerView?.haveMore == true) 1 else 0, 1)
 
         final override fun getItemViewType(position: Int): Int {
             val rowsCount = getRowsCount()
             if(rowsCount == 0 && position == 0) {
-                view?.internalLayoutManager = view?.SINGLE_LAYOUT_MANAGER
+                recyclerView?.internalLayoutManager = recyclerView?.SINGLE_LAYOUT_MANAGER
                 return if (showingError) TYPE_ERROR else TYPE_EMPTY
             }
-            view?.internalLayoutManager = view?.layoutManager
+            recyclerView?.internalLayoutManager = recyclerView?.layoutManager
             return if(position == rowsCount) TYPE_LOAD_MORE else getRowViewType(position)
         }
 
@@ -279,12 +377,12 @@ class PaginatedRecyclerView
         @Suppress("UNCHECKED_CAST")
         final override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
-                is EmptyViewHolder -> bindEmptyView(view?.emptyTitle, view?.emptySubtitle, view?.emptyIcon?:0, holder.itemView)
+                is EmptyViewHolder -> bindEmptyView(recyclerView?.emptyTitle, recyclerView?.emptySubtitle, recyclerView?.emptyIcon?:0, holder.itemView)
                 is ErrorViewHolder -> {
-                    bindErrorView(errorMessage, view?.errorIcon?:0, holder.itemView)
+                    bindErrorView(errorMessage, recyclerView?.errorIcon?:0, holder.itemView)
                     showingError = false
                 }
-                is LoadMoreViewHolder -> view?.layoutManager?.let { holder.configOrientation(it) }
+                is LoadMoreViewHolder -> recyclerView?.layoutManager?.let { holder.configOrientation(it) }
                 else -> {
                     if(holder as? VH != null) {
                         onBindRowViewHolder(holder, position)
@@ -350,7 +448,7 @@ class PaginatedRecyclerView
                 iconView.visibility = if(image != 0) View.VISIBLE else View.GONE
             }
 
-            view.findViewById<View>(R.id.error_retry_button).setOnClickListener { this.view?.requestFirstPage()}
+            view.findViewById<View>(R.id.error_retry_button).setOnClickListener { this.recyclerView?.requestFirstPage()}
         }
 
         /**
