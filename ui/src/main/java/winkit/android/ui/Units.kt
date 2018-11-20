@@ -5,6 +5,9 @@ import android.util.DisplayMetrics
 import android.graphics.Point
 import android.view.WindowManager   
 
+/**
+ * This object provide utilities functions to get screen sizes or dp and px conversions.
+ */
 object Units {
 
     /**

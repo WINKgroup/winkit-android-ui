@@ -6,4 +6,9 @@
         <attr name="empty_icon" format="reference" />
         <attr name="error_icon" format="reference" />
     </declare-styleable>
+    
+    <declare-styleable name="LinkTextView">
+        <attr name="link_color" format="color"/>
+        <attr name="link_underline" format="boolean" />
+    </declare-styleable>
 </resources>
