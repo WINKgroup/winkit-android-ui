@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         val SECTION = 1
         val HEADER = 2
 
-
         val menu = listOf(
                 Section("PaginatedRecyclerView"),
                 Activity(PaginatedRecyclerViewActivityExample::class, "PaginatedRecyclerView"),
