@@ -4,6 +4,8 @@
 
 `object Units`
 
+This object provide utilities functions to get screen sizes or dp and px conversions.
+
 ### Functions
 
 | Name | Summary |

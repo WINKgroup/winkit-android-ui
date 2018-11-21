@@ -1,4 +1,5 @@
 $dokka.format:gfm
 $dokka.linkExtension:md
-
+$dokka.location:winkit.android.ui$measure(android.view.View, kotlin.Function2((kotlin.Int, , kotlin.Unit)))winkit.android.ui/android.view.-view/measure.md
+$dokka.location:winkit.android.ui$measureIfNeeded(android.view.View, kotlin.Function2((kotlin.Int, , kotlin.Unit)))winkit.android.ui/android.view.-view/measure-if-needed.md
 winkit.android.ui
