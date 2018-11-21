@@ -10,8 +10,28 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
 
+/**
+ *
+ * A Utility View With the ability to show the links that
+ * are provided in the String
+ *
+ * @param context
+ * @param attrs
+ *
+ * @constructor gets the required parameters and initializes a new @LinkTextView
+ *
+ */
+
 class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     :TextView (context, attrs, defStyleAttr)  {
+
+    /**
+     *
+     * @property onLinkClick clickListener Provided to link
+     * @property linkUnderline : Boolean decides weather to draw a line under the link or not
+     * @property linkColor : Int @colorResourceInt
+     *
+     */
 
     var onLinkClick: ((url: String) -> Unit)? = null
     var linkUnderline = true
@@ -26,11 +46,19 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
     }
 
+    /**
+     *
+     * @override setText method of the normal TextView
+     * This method uses a SpannableStringBuilder to get detect the Urls in the text
+     * and makes them clickable
+     *
+     */
+
     override fun setText(text: CharSequence?, type: BufferType?) {
         super.setText(text, type)
-        if(text != null) {
-            val strBuilder = SpannableStringBuilder(text)
-            val urls = strBuilder.getSpans(0, text.length, URLSpan::class.java)
+        text!!.apply {
+            val strBuilder = SpannableStringBuilder(this)
+            val urls = strBuilder.getSpans(0, this.length, URLSpan::class.java)
             for (span in urls)
                 makeLinkClickable(strBuilder, span)
 
@@ -39,10 +67,13 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
     }
 
+    /**
+     * @param strBuilder used for replacing the span with the link
+     * @param span represents every link detected in the text
+     *
+     */
     private fun makeLinkClickable(strBuilder: SpannableStringBuilder, span: URLSpan) {
-        val start = strBuilder.getSpanStart(span)
-        val end = strBuilder.getSpanEnd(span)
-        val flags = strBuilder.getSpanFlags(span)
+
         val clickable = object : ClickableSpan() {
             override fun onClick(view: View) {
                 onLinkClick?.invoke(span.url)
@@ -54,9 +85,15 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
                 }
                 ds.isUnderlineText = linkUnderline
             }
-
         }
-        strBuilder.setSpan(clickable, start, end, flags)
-        strBuilder.removeSpan(span)
+
+        strBuilder.apply {
+            val start = getSpanStart(span)
+            val end = getSpanEnd(span)
+            val flags = getSpanFlags(span)
+
+            setSpan(clickable, start, end, flags)
+            removeSpan(span)
+        }
     }
 }
