@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:gravity="center"
+        android:src="@drawable/logo"
+        android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="128dp" />
+
+    <LinearLayout
+        android:background="?android:selectableItemBackground"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/githubButton"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/github_circle"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:text="View on Github"
+            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
