@@ -1,14 +1,19 @@
 package winkit.android.ui
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import java.util.regex.Pattern
 
 /**
  *
@@ -39,7 +44,7 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     init {
         val ta = getContext().obtainStyledAttributes(attrs, R.styleable.LinkTextView)
-        ta!!.apply {
+        ta?.apply {
             linkUnderline = getBoolean(R.styleable.LinkTextView_link_underline, linkUnderline)
             linkColor = getColor(R.styleable.LinkTextView_link_color, linkColor)
             recycle()
@@ -55,7 +60,7 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
      */
 
     override fun setText(text: CharSequence?, type: BufferType) {
-        text!!.apply {
+        text?.apply {
             val strBuilder = SpannableStringBuilder(this)
             val urls = strBuilder.getSpans(0, strBuilder.length, URLSpan::class.java)
             for (span in urls)
@@ -63,7 +68,14 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
             super.setText(strBuilder, BufferType.SPANNABLE)
             movementMethod = LinkMovementMethod.getInstance()
-        }
+        } ?: super.setText(text, type)
+    }
+    
+    fun setHtml(html: String) {
+        text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        else
+            Html.fromHtml(html)
     }
 
     /**
