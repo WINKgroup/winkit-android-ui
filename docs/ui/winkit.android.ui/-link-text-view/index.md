@@ -31,7 +31,8 @@ are provided in the String
 
 | Name | Summary |
 |---|---|
-| [setText](set-text.md) | `fun setText(text: `[`CharSequence`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html)`?, type: `[`BufferType`](https://developer.android.com/reference/android/widget/TextView/BufferType.html)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [setHtml](set-html.md) | `fun setHtml(html: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>This is the method which provides the feature to pass links via HTML and sends them to the default setText method |
+| [setText](set-text.md) | `fun setText(text: `[`CharSequence`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html)`?, type: `[`BufferType`](https://developer.android.com/reference/android/widget/TextView/BufferType.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Extension Functions
 

@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.reflect.KClass
 
 
-
 class MainActivity : AppCompatActivity() {
 
 
@@ -28,17 +27,19 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    class Adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         val ROW = 0
         val SECTION = 1
         val HEADER = 2
 
-
         val menu = listOf(
                 Section("PaginatedRecyclerView"),
                 Activity(PaginatedRecyclerViewActivityExample::class, "PaginatedRecyclerView"),
-                Activity(PaginatedRecyclerViewCustomActivityExample::class, "PaginatedRecyclerView with custom error and empty layout")
+                Activity(PaginatedRecyclerViewCustomActivityExample::class, "PaginatedRecyclerView with custom error and empty layout"),
+                Section("LinkTextView"),
+                Activity(LinkTextViewExampleActivity::class, "LinkTextView Usage Example")
+
         )
 
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder =
@@ -53,8 +54,8 @@ class MainActivity : AppCompatActivity() {
         override fun getItemViewType(position: Int): Int {
             if (position == 0) return HEADER
 
-            val item = menu[position-1]
-            return when(item) {
+            val item = menu[position - 1]
+            return when (item) {
                 is Section -> SECTION
                 else -> ROW
             }
@@ -63,34 +64,37 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
             if (p1 == 0) return
             val item = menu[p1 - 1]
-            when(item) {
+            when (item) {
                 is Section -> (p0 as? ViewSection)?.bind(item)
                 is Activity -> (p0 as? ViewRow)?.bind(item)
             }
         }
 
-        class ViewRow(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_row, parent, false)) {
+        class ViewRow(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_row, parent, false)) {
             private val titleText: TextView = itemView.findViewById(R.id.rowText)
+
             init {
                 itemView.setOnClickListener {
-                    if(itemView.tag != null) (itemView.tag as? Activity).let { tag ->
-                        itemView.context.startActivity(Intent(itemView.context, tag!!.actClass.java ))
+                    if (itemView.tag != null) (itemView.tag as? Activity).let { tag ->
+                        itemView.context.startActivity(Intent(itemView.context, tag!!.actClass.java))
                     }
                 }
             }
 
-            fun bind (row: Activity) {
+            fun bind(row: Activity) {
                 itemView.tag = row
                 titleText.text = row.title
             }
         }
 
-        class ViewSection(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_section, parent, false)) {
+        class ViewSection(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_section, parent, false)) {
             private val titleText: TextView = itemView.findViewById(R.id.sectionText)
-            fun bind (section: Section) { titleText.text = section.title }
+            fun bind(section: Section) {
+                titleText.text = section.title
+            }
         }
 
-        class ViewHeader(parent: ViewGroup): RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_header, parent, false)) {
+        class ViewHeader(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_header, parent, false)) {
             init {
                 itemView.findViewById<View>(R.id.githubButton)?.setOnClickListener {
                     val myIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/WINKgroup/winkit-android-ui"))
@@ -101,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    open class Item (val title: String)
-    class Activity (val actClass: KClass<*>, title: String): Item(title)
-    class Section(title: String): Item(title)
+    open class Item(val title: String)
+    class Activity(val actClass: KClass<*>, title: String) : Item(title)
+    class Section(title: String) : Item(title)
 }

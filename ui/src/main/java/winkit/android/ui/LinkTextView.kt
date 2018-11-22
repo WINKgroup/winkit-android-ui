@@ -1,14 +1,19 @@
 package winkit.android.ui
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import java.util.regex.Pattern
 
 /**
  *
@@ -23,7 +28,7 @@ import android.widget.TextView
  */
 
 class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    :TextView (context, attrs, defStyleAttr)  {
+    : TextView(context, attrs, defStyleAttr) {
 
     /**
      *
@@ -39,10 +44,10 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     init {
         val ta = getContext().obtainStyledAttributes(attrs, R.styleable.LinkTextView)
-        if (ta != null) {
-            linkUnderline = ta.getBoolean(R.styleable.LinkTextView_link_underline, linkUnderline)
-            linkColor = ta.getColor(R.styleable.LinkTextView_link_color, linkColor)
-            ta.recycle()
+        ta?.apply {
+            linkUnderline = getBoolean(R.styleable.LinkTextView_link_underline, linkUnderline)
+            linkColor = getColor(R.styleable.LinkTextView_link_color, linkColor)
+            recycle()
         }
     }
 
@@ -53,19 +58,39 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
      * and makes them clickable
      *
      */
-    override fun setText(text: CharSequence?, type: BufferType?) {
-        text!!.apply {
+
+    override fun setText(text: CharSequence?, type: BufferType) {
+        text?.apply {
             val strBuilder = SpannableStringBuilder(this)
             val urls = strBuilder.getSpans(0, strBuilder.length, URLSpan::class.java)
             for (span in urls)
                 makeLinkClickable(strBuilder, span)
 
-            super.setText(text, BufferType.SPANNABLE)
+            super.setText(strBuilder, BufferType.SPANNABLE)
             movementMethod = LinkMovementMethod.getInstance()
-        }
+        } ?: super.setText(text, type)
     }
 
     /**
+     *
+     * This is the method which provides the feature to pass links via HTML and
+     * sends them to the default setText method
+     *
+     * @param html is the html text you provide
+     *
+     * @example <a href=https://google.com>google</a>
+     *
+     */
+
+    fun setHtml(html: String) {
+        text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        else
+            Html.fromHtml(html)
+    }
+
+    /**
+     *
      * @param strBuilder used for replacing the span with the link
      * @param span represents every link detected in the text
      *
@@ -78,7 +103,7 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
             }
 
             override fun updateDrawState(ds: TextPaint) {
-                if(linkColor != 0) {
+                if (linkColor != 0) {
                     ds.color = linkColor
                 }
                 ds.isUnderlineText = linkUnderline
