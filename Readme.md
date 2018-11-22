@@ -2,7 +2,7 @@
 
 # Winkit Ui
 
-<img src="https://img.shields.io/badge/winkit-ui-green.svg?logo=android&longCache=true&style=popout"> <img src="https://img.shields.io/badge/kotlin-1.2.71-blue.svg?logo=kotlin&longCache=true&style=popout">
+<img src="https://img.shields.io/badge/winkit-ui-green.svg?logo=android&longCache=true&style=popout"> <img src="https://img.shields.io/badge/kotlin-1.2.71-blue.svg?logo=kotlin&longCache=true&style=popout"> <img src="https://img.shields.io/badge/ver-0.1-orange.svg&longCache=true">
 
 An android ui library that provide useful classes to speed up the implementation.
 
@@ -10,7 +10,24 @@ Complete documentation [Here](https://winkgroup.github.io/winkit-android-ui/ui/w
 
 ### Install
 
-No release made (work in progress).
+**1** Add the JitPack repository to your root build.gradle at the end of repositories
+
+```groovy
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+**2** Add the dependency
+
+```groovy
+dependencies {
+	implementation 'com.github.WINKgroup:winkit-android-ui:0.1'
+}
+```
 
 ## Views
 
