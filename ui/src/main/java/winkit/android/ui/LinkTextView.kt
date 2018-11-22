@@ -53,16 +53,14 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
      * and makes them clickable
      *
      */
-
     override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(text, type)
         text!!.apply {
             val strBuilder = SpannableStringBuilder(this)
-            val urls = strBuilder.getSpans(0, this.length, URLSpan::class.java)
+            val urls = strBuilder.getSpans(0, strBuilder.length, URLSpan::class.java)
             for (span in urls)
                 makeLinkClickable(strBuilder, span)
 
-            setText(strBuilder)
+            super.setText(text, BufferType.SPANNABLE)
             movementMethod = LinkMovementMethod.getInstance()
         }
     }

@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PaginatedRecyclerViewActivityExample" />
+        <activity android:name=".PaginatedRecyclerViewCustomActivityExample" />
     </application>
 
 </manifest>
