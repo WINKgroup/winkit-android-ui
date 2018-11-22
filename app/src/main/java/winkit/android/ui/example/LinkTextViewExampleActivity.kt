@@ -17,9 +17,10 @@ class LinkTextViewExampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_link_text_view_example)
 
+        title = "LinkTextView Example"
+
         tvLinked.setHtml("<a href= www.google.com >www.google.com</a> ")
 
-        tvLinked.setText("hehy man")
 
     }
 }

@@ -70,7 +70,18 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
             movementMethod = LinkMovementMethod.getInstance()
         } ?: super.setText(text, type)
     }
-    
+
+    /**
+     *
+     * This is the method which provides the feature to pass links via HTML and
+     * sends them to the default setText method
+     *
+     * @param html is the html text you provide
+     *
+     * @example <a href=https://google.com>google</a>
+     *
+     */
+
     fun setHtml(html: String) {
         text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
             Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
@@ -79,6 +90,7 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
     }
 
     /**
+     *
      * @param strBuilder used for replacing the span with the link
      * @param span represents every link detected in the text
      *
