@@ -1,14 +1,10 @@
 package winkit.android.ui.example
 
-import android.os.Build
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
-import android.text.SpannableString
-import android.text.style.ClickableSpan
-import android.text.style.URLSpan
-import android.util.Log
-import android.widget.TextView
+import android.support.v4.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_link_text_view_example.*
 
 class LinkTextViewExampleActivity : AppCompatActivity() {
@@ -19,8 +15,14 @@ class LinkTextViewExampleActivity : AppCompatActivity() {
 
         title = "LinkTextView Example"
 
-        tvLinked.setHtml("<a href= www.google.com >www.google.com</a> ")
+        tvLink.setHtml(resources.getString(R.string.rome_html_link))
 
+        tvLinkCustom.setHtml(resources.getString(R.string.rome_html_multiple_ink))
+        tvLinkCustom.linkColor = ContextCompat.getColor(this, R.color.colorAccent)
+        tvLinkCustom.linkUnderline = false
+        tvLinkCustom.onLinkClick = {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
+        }
 
     }
 }

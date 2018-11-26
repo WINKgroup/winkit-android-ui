@@ -2,6 +2,7 @@ package winkit.android.ui
 
 import android.content.Context
 import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -40,7 +41,7 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     var onLinkClick: ((url: String) -> Unit)? = null
     var linkUnderline = true
-    var linkColor = 0
+    var linkColor = ContextCompat.getColor(context, R.color.colorPrimary)
 
     init {
         val ta = getContext().obtainStyledAttributes(attrs, R.styleable.LinkTextView)
@@ -62,12 +63,15 @@ class LinkTextView @JvmOverloads constructor(context: Context, attrs: AttributeS
     override fun setText(text: CharSequence?, type: BufferType) {
         text?.apply {
             val strBuilder = SpannableStringBuilder(this)
-            val urls = strBuilder.getSpans(0, strBuilder.length, URLSpan::class.java)
+            val urls = strBuilder.getSpans(0, this.length, URLSpan::class.java)
             for (span in urls)
                 makeLinkClickable(strBuilder, span)
 
             super.setText(strBuilder, BufferType.SPANNABLE)
             movementMethod = LinkMovementMethod.getInstance()
+
+            Log.e("Link" , urls.size.toString())
+
         } ?: super.setText(text, type)
     }
 

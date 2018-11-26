@@ -4,13 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".LinkTextViewExampleActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:paddingStart="@dimen/padding_normal"
+        android:paddingEnd="@dimen/padding_normal"
+        android:text="Linked TextView with Default Settings"
+        android:textSize="@dimen/tv_large" />
+
     <winkit.android.ui.LinkTextView
-        android:id="@+id/tvLinked"
-        android:layout_width="wrap_content"
-        android:text="https://www.google.com/"
-        android:layout_height="wrap_content" />
+        android:id="@+id/tvLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/drawable_bg_textview"
+        android:elevation="2dp"
+        android:paddingStart="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_large"
+        android:textSize="@dimen/tv_normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:paddingStart="@dimen/padding_normal"
+        android:paddingEnd="@dimen/padding_normal"
+        android:text="Linked TextView with Customization"
+        android:textSize="@dimen/tv_large" />
+
+    <winkit.android.ui.LinkTextView
+        android:id="@+id/tvLinkCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/drawable_bg_textview"
+        android:elevation="2dp"
+        android:paddingStart="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_large"
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_large"
+        android:textSize="@dimen/tv_normal" />
 
 </LinearLayout>

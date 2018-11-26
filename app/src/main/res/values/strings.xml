@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">UiExample</string>
+
+    <string name="rome_html_link">
+        <![CDATA[
+        <a href="https://www.google.com">Rome</a>, Italy’s capital, is a sprawling, cosmopolitan city with nearly 3,000 years of globally influential art, architecture and culture on display. Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire
+        ]]>
+    </string>
+
+    <string name="rome_html_multiple_ink">
+        <![CDATA[
+        <a href="https://www.google.com">Rome</a>, Italy’s capital, is a sprawling, cosmopolitan city with nearly 3,000 years of globally <a href="https://www.wink.by">influential</a> art, architecture and culture on <a href="https://www.ebay.it">display</a>. Ancient ruins such as the Forum and the Colosseum evoke the power of the former Roman Empire
+        ]]>
+    </string>
+
 </resources>
